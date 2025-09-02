@@ -103,6 +103,11 @@
             justify-content: space-between;
         }
 
+        .post-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
         .post-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
@@ -189,9 +194,9 @@
         <main>
             <section class="post-grid" id="post-list"></section>
             <div class="pagination" id="pagination">
-                <button id="prev-btn" class="page-button"><i class="fas fa-chevron-left"></i> Previous</button>
+                <button id="prev-btn" class="page-button"><i class="fas fa-chevron-left"></i></button>
                 <span id="page-info" class="page-info">Page 1 of 1</span>
-                <button id="next-btn" class="page-button">Next <i class="fas fa-chevron-right"></i></button>
+                <button id="next-btn" class="page-button"><i class="fas fa-chevron-right"></i></button>
             </div>
         </main>
     </div>
