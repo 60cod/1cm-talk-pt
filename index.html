@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1024px;
+            width: 100%;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        
+        /* Header */
+        header {
+            background-color: #ffffff;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-title {
+            color: #03254c;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+        }
+
+        /* Post Grid */
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .post-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .post-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title {
+            color: #03254c;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            color: #868e96;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .meta-item i {
+            margin-right: 0.5rem;
+            color: #007bff;
+        }
+
+        .post-summary {
+            color: #495057;
+            font-size: 1rem;
+            margin-top: auto;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .page-button {
+            background-color: #e9ecef;
+            border: none;
+            color: #495057;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .page-button:hover {
+            background-color: #ced4da;
+        }
+
+        .page-button:active {
+            transform: translateY(1px);
+        }
+
+        .page-button:disabled {
+            background-color: #f1f3f5;
+            color: #ced4da;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            font-weight: 700;
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="blog-title">My Blog</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search posts...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </header>
+
+        <main>
+            <section class="post-grid" id="post-list"></section>
+            <div class="pagination" id="pagination">
+                <button id="prev-btn" class="page-button"><i class="fas fa-chevron-left"></i> Previous</button>
+                <span id="page-info" class="page-info">Page 1 of 1</span>
+                <button id="next-btn" class="page-button">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postList = document.getElementById('post-list');
+            const searchInput = document.getElementById('search-input');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const pageInfo = document.getElementById('page-info');
+
+            let allPosts = [];
+            const postsPerPage = 6;
+            let currentPage = 1;
+            let filteredPosts = [];
+
+            // Fetch and render posts
+            const fetchPosts = async () => {
+                try {
+                    const response = await fetch('posts.json');
+                    allPosts = await response.json();
+                    allPosts.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date
+                    filteredPosts = [...allPosts];
+                    renderPosts();
+                } catch (error) {
+                    console.error('Error fetching posts:', error);
+                }
+            };
+
+            const renderPosts = () => {
+                postList.innerHTML = '';
+                const start = (currentPage - 1) * postsPerPage;
+                const end = start + postsPerPage;
+                const postsToRender = filteredPosts.slice(start, end);
+
+                postsToRender.forEach(post => {
+                    const postCard = document.createElement('a');
+                    postCard.href = post.url;
+                    postCard.classList.add('post-card');
+                    
+                    const summary = post.summary.length > 100 ? post.summary.substring(0, 100) + '...' : post.summary;
+
+                    postCard.innerHTML = `
+                        <h2 class="post-title">${post.title}</h2>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-user"></i>${post.author}</span>
+                            <span class="meta-item"><i class="fas fa-calendar-alt"></i>${post.date}</span>
+                        </div>
+                        <p class="post-summary">${summary}</p>
+                    `;
+                    postList.appendChild(postCard);
+                });
+
+                updatePagination();
+            };
+
+            const updatePagination = () => {
+                const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+                pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+            };
+
+            const goToPage = (page) => {
+                currentPage = page;
+                renderPosts();
+            };
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    goToPage(currentPage - 1);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < Math.ceil(filteredPosts.length / postsPerPage)) {
+                    goToPage(currentPage + 1);
+                }
+            });
+
+            // Real-time search
+            searchInput.addEventListener('keyup', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                filteredPosts = allPosts.filter(post => 
+                    post.title.toLowerCase().includes(searchTerm)
+                );
+                currentPage = 1;
+                renderPosts();
+            });
+
+            fetchPosts();
+        });
+    </script>
+</body>
+</html>
