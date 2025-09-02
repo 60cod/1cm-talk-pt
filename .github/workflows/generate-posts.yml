@@ -1,0 +1,41 @@
+name: Generate Blog Posts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'posts/*.md' # Only run when a markdown file is pushed
+
+jobs:
+  generate-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # `generate.js` 스크립트가 커밋을 생성할 수 있도록 토큰을 설정
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # `posts.json`을 제대로 읽기 위해 전체 커밋 히스토리를 가져옴
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install gray-matter marked
+
+      - name: Run post generation script
+        run: node generate.js
+
+      - name: Commit generated files
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add posts/*.html posts.json
+          git commit -m 'Docs: Generate and update blog posts [skip ci]' || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push
