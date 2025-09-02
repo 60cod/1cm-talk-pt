@@ -11,14 +11,14 @@ jobs:
   generate-and-commit:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # This line is crucial for write permissions
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # `generate.js` 스크립트가 커밋을 생성할 수 있도록 토큰을 설정
+          # `generate.js` script will create commits with this token
           token: ${{ secrets.GITHUB_TOKEN }}
-          # `posts.json`을 제대로 읽기 위해 전체 커밋 히스토리를 가져옴
+          # Fetch full commit history to read posts.json correctly
           fetch-depth: 0
 
       - name: Set up Node.js
@@ -32,10 +32,14 @@ jobs:
       - name: Run post generation script
         run: node generate.js
 
-      - name: Commit generated files
+      - name: Configure Git and Pull latest changes
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
+          git pull --rebase
+
+      - name: Commit generated files
+        run: |
           git add posts/*.html posts.json
           git commit -m 'Docs: Generate and update blog posts [skip ci]' || echo "No changes to commit"
 
