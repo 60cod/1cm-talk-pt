@@ -17,9 +17,9 @@ fs.readdirSync(postsDir).forEach(file => {
     posts.push({
       title: data.title,
       author: data.author,
-      date: data.date, // 날짜를 Date 객체로 변환하지 않고 문자열 그대로 사용
-      slug: file.replace('.md', ''),
-      summary: content.substring(0, 100).trim() + '...'
+      date: typeof data.date === 'object' ? data.date.toISOString().split('T')[0] : data.date,
+      summary: content.substring(0, 100).trim() + '...',
+      url: `./posts/${file.replace('.md', '.html')}`
     });
 
     // 마크다운을 HTML로 변환
@@ -59,7 +59,7 @@ fs.readdirSync(postsDir).forEach(file => {
     <main class="w-full container bg-white rounded-xl shadow-lg p-8 md:p-12">
         <div class="post-info text-sm text-gray-500 mb-8 flex justify-end space-x-4">
             <span><i class="fas fa-user mr-2"></i>${data.author}</span>
-            <span><i class="fas fa-calendar-alt mr-2"></i>${data.date}</span>
+            <span><i class="fas fa-calendar-alt mr-2"></i>${typeof data.date === 'object' ? data.date.toISOString().split('T')[0] : data.date}</span>
         </div>
         <div class="post-content leading-relaxed text-gray-700">
             ${htmlContent}
