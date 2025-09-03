@@ -133,9 +133,6 @@ fs.readdirSync(postsDir).forEach(file => {
             color: #03254c;
             font-size: 2.25rem;
             font-weight: 700;
-            margin: 2rem 0 1rem 0;
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 0.5rem;
         }
 
         .post-content h2 {
@@ -143,7 +140,6 @@ fs.readdirSync(postsDir).forEach(file => {
             font-size: 1.875rem;
             font-weight: 600;
             margin: 2rem 0 1rem 0;
-            border-bottom: 2px solid #e9ecef;
             padding-bottom: 0.5rem;
         }
 
@@ -151,7 +147,7 @@ fs.readdirSync(postsDir).forEach(file => {
             color: #03254c;
             font-size: 1.5rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem 0;
+            margin: 0;
         }
 
         .post-content h4, .post-content h5, .post-content h6 {
@@ -195,10 +191,11 @@ fs.readdirSync(postsDir).forEach(file => {
 
         .post-content code {
             background-color: #f8f9fa;
-            color: #e83e8c;
+            color: #007bff;
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
-            font-size: 0.875rem;
+            font-size: 13px;
+            font-family: 'Inter';
         }
 
         .post-content pre {
@@ -207,7 +204,6 @@ fs.readdirSync(postsDir).forEach(file => {
             border-radius: 8px;
             overflow-x: auto;
             margin: 1.5rem 0;
-            border-left: 4px solid #007bff;
         }
 
         .post-content blockquote {
@@ -248,10 +244,7 @@ fs.readdirSync(postsDir).forEach(file => {
 
         .post-content hr {
             border: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #007bff, #e9ecef);
-            margin: 2rem 0;
-            border-radius: 1px;
+            border-bottom: 2px solid #e9ecef;
         }
 
         @media (max-width: 768px) {
@@ -280,7 +273,7 @@ fs.readdirSync(postsDir).forEach(file => {
 <body>
     <div class="container">
         <div class="header">
-            <a href="../index.html" class="back-link">
+            <a href="../" class="back-link">
                 <i class="fas fa-arrow-left"></i>뒤로가기
             </a>
             <h1 class="post-title">${data.title}</h1>
