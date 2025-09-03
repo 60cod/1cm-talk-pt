@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1시간 만에 나만의 블로그 만들기 | My Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #03254c;
+        }
+
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+
+        .post-title {
+            color: #03254c;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            color: #868e96;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .meta-item i {
+            margin-right: 0.5rem;
+            color: #007bff;
+        }
+
+        .post {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-content {
+            color: #495057;
+            line-height: 1.8;
+        }
+
+        .post-content h1 {
+            color: #03254c;
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+
+        .post-content h2 {
+            color: #03254c;
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content h3 {
+            color: #03254c;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .post-content h4, .post-content h5, .post-content h6 {
+            color: #03254c;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .post-content p {
+            margin: 1rem 0;
+        }
+
+        .post-content ul, .post-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            margin: 0.5rem 0;
+        }
+
+        .post-content strong {
+            color: #03254c;
+            font-weight: 700;
+        }
+
+        .post-content em {
+            font-style: italic;
+            color: #007bff;
+        }
+
+        .post-content a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .post-content a:hover {
+            text-decoration: underline;
+        }
+
+        .post-content code {
+            background-color: #f8f9fa;
+            color: #007bff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'Inter';
+        }
+
+        .post-content pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-content blockquote {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .post-content th, .post-content td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .post-content th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #03254c;
+        }
+
+        .post-content hr {
+            border: 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header, .post {
+                padding: 1.5rem;
+            }
+            
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-content h1 {
+                font-size: 1.875rem;
+            }
+            
+            .post-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="../" class="back-link">
+                <i class="fas fa-arrow-left"></i>뒤로가기
+            </a>
+            <h1 class="post-title">1시간 만에 나만의 블로그 만들기</h1>
+            <div class="post-meta">
+                <span class="meta-item"><i class="fas fa-user"></i>Genius Kim</span>
+                <span class="meta-item"><i class="fas fa-calendar-alt"></i>2025-09-02</span>
+            </div>
+        </div>
+        <div class="post">
+            <div class="post-content">
+                <h1>1시간 만에 나만의 블로그 만들기</h1>
+<h3>💡 아래 내용을 그대로 AI에게 전달하세요!</h3>
+<hr>
+<h1>개인 블로그 프로젝트 (정적 페이지, GitHub Pages 배포)</h1>
+<h2>프로젝트 목표</h2>
+<p>정적 개인 블로그를 만들고 GitHub Pages로 배포합니다. <strong>누구나 쉽게 관리할 수 있는 자동화된 마크다운 기반 블로그</strong>를 구축하는 것이 핵심 목표입니다.</p>
+<h2>페이지 구성</h2>
+<h3>1. 홈 화면 (index.html)</h3>
+<ul>
+<li><strong>헤더</strong>: <ul>
+<li>블로그 제목(&quot;My Blog&quot;)</li>
+<li><strong>실시간 검색 기능</strong> (포스트 제목 기준, JavaScript로 즉시 필터링)</li>
+<li>Font Awesome 돋보기 아이콘 포함 검색창</li>
+</ul>
+</li>
+<li><strong>포스트 목록</strong>:<ul>
+<li><strong>데스크톱</strong>: 한 줄에 2개 포스트</li>
+<li><strong>모바일</strong>: 한 줄에 1개 포스트 (반응형 디자인)</li>
+<li>한 페이지당 <strong>최대 6개 포스트</strong> 표시</li>
+<li><strong>페이징 기능</strong>: 이전/다음 페이지 이동 버튼</li>
+<li>각 포스트 카드 클릭 시 상세보기로 이동</li>
+</ul>
+</li>
+<li><strong>포스트 카드 정보</strong>: 제목, 작성자, 작성일, 요약 (100자)</li>
+</ul>
+<h3>2. 포스트 상세보기 화면 (posts/*.html)</h3>
+<ul>
+<li><strong>헤더</strong>: <ul>
+<li>뒤로가기 버튼 (Font Awesome 화살표 아이콘)</li>
+<li>포스트 제목, 작성자, 작성일 (Font Awesome 아이콘 사용)</li>
+</ul>
+</li>
+<li><strong>본문</strong>: 마크다운 렌더링된 HTML 컨텐츠</li>
+<li><strong>네비게이션</strong>: 깔끔한 뒤로가기 버튼으로 홈화면 복귀 (경로: <code>../</code>)</li>
+</ul>
+<h2>포스트 관리 방식 (핵심: 완전 자동화)</h2>
+<h3>사용자 워크플로우 (비개발자 친화적)</h3>
+<ol>
+<li><strong>마크다운 형식으로 포스트 작성</strong>: <code>/posts/</code> 폴더에 <code>.md</code> 파일 생성</li>
+<li><strong>상단에 Frontmatter 작성</strong>:<pre><code class="language-yaml">---
+title: 포스트 제목
+author: 작성자 이름
+date: 2025-09-01
+---
+
+마크다운 내용...
+</code></pre>
+</li>
+<li><strong>GitHub Push</strong>: 파일을 GitHub에 업로드</li>
+<li><strong>그 후 자동 처리됨</strong>: GitHub Actions가 자동으로 HTML과 posts.json 생성</li>
+</ol>
+<h3>기술적 자동화 구현</h3>
+<ul>
+<li><strong>GitHub Actions 워크플로우</strong>: <ul>
+<li>Markdown → HTML 자동 변환 (marked 라이브러리 사용)</li>
+<li><code>posts.json</code> 자동 생성 (포스트 메타데이터 포함)</li>
+<li>모든 포스트 HTML 페이지 자동 생성</li>
+</ul>
+</li>
+<li><strong>JavaScript 동적 로딩</strong>: <code>posts.json</code>을 읽어서 홈 화면 포스트 목록 생성</li>
+<li><strong>파일 구조</strong>:<pre><code>/
+├── index.html (홈화면)
+├── posts.json (자동 생성)
+├── posts/
+│   ├── post1.md (사용자 작성)
+│   ├── post1.html (자동 생성)
+│   └── ...
+└── .github/workflows/generate-posts.yml
+</code></pre>
+</li>
+</ul>
+<h2>디자인 요구 사항</h2>
+<h3>컬러 스키마</h3>
+<ul>
+<li><strong>메인 컬러</strong>: 회색 계열 (#f8f9fa, #e9ecef) + 순백색 (#ffffff)</li>
+<li><strong>포인트 컬러</strong>: 남색 계열 (#007bff, #03254c)</li>
+<li><strong>텍스트</strong>: 다크 그레이 (#495057, #343a40)</li>
+</ul>
+<h3>디자인 철학</h3>
+<ul>
+<li><strong>개발자 블로그 스타일</strong>: 깔끔하고 전문적인 외관</li>
+<li><strong>미니멀 디자인</strong>: 불필요한 요소 제거, 컨텐츠 중심</li>
+<li><strong>모던 UI</strong>: 둥근 모서리, 부드러운 그림자, 호버 효과</li>
+<li><strong>아이콘 활용</strong>: Font Awesome으로 텍스트 대체</li>
+<li><strong>불필요한 기능 제거</strong>: 댓글, 좋아요, 소셜, 구독 기능 없음</li>
+</ul>
+<h3>반응형 디자인 (중요!)</h3>
+<ul>
+<li><strong>데스크톱 (1024px+)</strong>: 2열 포스트 레이아웃</li>
+<li><strong>태블릿 (768px~1024px)</strong>: 1열 레이아웃, 적절한 여백</li>
+<li><strong>모바일 (480px~768px)</strong>: 최적화된 터치 인터페이스</li>
+<li><strong>소형 모바일 (480px 이하)</strong>: 전체 화면 활용, 터치 친화적 버튼</li>
+<li><strong>페이지네이션</strong>: 모든 화면에서 올바른 순서 유지 (이전 - 페이지 정보 - 다음)</li>
+</ul>
+<h2>기술 조건</h2>
+<h3>프론트엔드</h3>
+<ul>
+<li><strong>순수 웹 기술</strong>: HTML5, CSS3, Vanilla JavaScript</li>
+<li><strong>외부 라이브러리</strong>: Font Awesome (CDN)</li>
+<li><strong>마크다운 처리</strong>: JavaScript marked 라이브러리 (GitHub Actions에서 사용)</li>
+</ul>
+<h3>백엔드/자동화</h3>
+<ul>
+<li><strong>GitHub Actions</strong>: 자동 빌드 및 배포 파이프라인</li>
+<li><strong>Node.js</strong>: 마크다운 처리 스크립트</li>
+<li><strong>정적 호스팅</strong>: GitHub Pages 또는 유사한 서비스</li>
+</ul>
+<h3>파일 관리</h3>
+<ul>
+<li><strong>데이터베이스 없음</strong>: JSON 파일 기반 데이터 관리</li>
+<li><strong>버전 관리</strong>: Git을 통한 포스트 히스토리 관리</li>
+<li><strong>자동 생성 파일</strong>: <code>.gitignore</code>로 적절히 관리</li>
+</ul>
+<h2>구현 요구사항</h2>
+<h3>필수 구현 사항</h3>
+<ol>
+<li><p><strong>완전한 자동화 시스템</strong>: </p>
+<ul>
+<li>GitHub Actions 워크플로우 완벽 구성</li>
+<li>마크다운 → HTML 변환 자동화</li>
+<li><code>posts.json</code> 자동 생성 및 업데이트</li>
+</ul>
+</li>
+<li><p><strong>반응형 사용자 인터페이스</strong>:</p>
+<ul>
+<li>모든 화면 크기에서 완벽한 레이아웃</li>
+<li>터치 친화적 인터페이스</li>
+<li>부드러운 애니메이션과 트랜지션</li>
+</ul>
+</li>
+<li><p><strong>검색 및 페이징</strong>:</p>
+<ul>
+<li>실시간 검색 기능 (클라이언트 사이드)</li>
+<li>부드러운 페이지 전환</li>
+<li>검색 결과에서도 페이징 적용</li>
+</ul>
+</li>
+<li><p><strong>접근성 및 사용성</strong>:</p>
+<ul>
+<li>의미있는 아이콘 사용</li>
+<li>키보드 네비게이션 지원</li>
+<li>빠른 로딩 속도</li>
+</ul>
+</li>
+</ol>
+<h3>샘플 데이터</h3>
+<ul>
+<li><strong>최소 2-3개 샘플 포스트</strong> 제공</li>
+<li><strong>다양한 마크다운 요소</strong>: 헤딩, 리스트, 코드 블록, 링크 등</li>
+</ul>
+<h3>프로젝트 구조 예시</h3>
+<pre><code>blog-project/
+├── index.html                 # 메인 홈페이지
+├── posts.json                 # 자동 생성되는 포스트 데이터
+├── .gitignore                 # Git 제외 파일 설정
+├── posts/                     # 포스트 디렉토리
+│   ├── sample-post1.md       # 샘플 마크다운 포스트
+│   ├── sample-post1.html     # 자동 생성 HTML
+│   └── ...
+└── .github/
+    └── workflows/
+        └── generate-posts.yml # 자동화 워크플로우
+</code></pre>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

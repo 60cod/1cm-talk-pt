@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미역국 레시피 | My Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #03254c;
+        }
+
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+
+        .post-title {
+            color: #03254c;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            color: #868e96;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .meta-item i {
+            margin-right: 0.5rem;
+            color: #007bff;
+        }
+
+        .post {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-content {
+            color: #495057;
+            line-height: 1.8;
+        }
+
+        .post-content h1 {
+            color: #03254c;
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+
+        .post-content h2 {
+            color: #03254c;
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content h3 {
+            color: #03254c;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .post-content h4, .post-content h5, .post-content h6 {
+            color: #03254c;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .post-content p {
+            margin: 1rem 0;
+        }
+
+        .post-content ul, .post-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            margin: 0.5rem 0;
+        }
+
+        .post-content strong {
+            color: #03254c;
+            font-weight: 700;
+        }
+
+        .post-content em {
+            font-style: italic;
+            color: #007bff;
+        }
+
+        .post-content a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .post-content a:hover {
+            text-decoration: underline;
+        }
+
+        .post-content code {
+            background-color: #f8f9fa;
+            color: #007bff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'Inter';
+        }
+
+        .post-content pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-content blockquote {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .post-content th, .post-content td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .post-content th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #03254c;
+        }
+
+        .post-content hr {
+            border: 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header, .post {
+                padding: 1.5rem;
+            }
+            
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-content h1 {
+                font-size: 1.875rem;
+            }
+            
+            .post-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="../" class="back-link">
+                <i class="fas fa-arrow-left"></i>뒤로가기
+            </a>
+            <h1 class="post-title">미역국 레시피</h1>
+            <div class="post-meta">
+                <span class="meta-item"><i class="fas fa-user"></i>Genius Kim</span>
+                <span class="meta-item"><i class="fas fa-calendar-alt"></i>2025-09-02</span>
+            </div>
+        </div>
+        <div class="post">
+            <div class="post-content">
+                <h1>🍽️ 미역국 레시피</h1>
+<h2>재료</h2>
+<ul>
+<li>건미역: 10g</li>
+<li>소고기 (양지 또는 국거리용): 150g</li>
+<li>참기름: 1큰술</li>
+<li>국간장: 2큰술</li>
+<li>다진 마늘: 1작은술</li>
+<li>소금: 적당량</li>
+<li>물: 약 6컵 (1.2L)</li>
+</ul>
+<h2>준비 과정</h2>
+<ol>
+<li><strong>미역 불리기</strong>  <ul>
+<li>건미역을 찬물에 10분~15분 정도 불린 후, 여러 번 씻어 물기를 제거한다.</li>
+</ul>
+</li>
+<li><strong>고기 손질</strong>  <ul>
+<li>소고기는 한 입 크기로 썰고, 찬물에 살짝 헹군다.</li>
+</ul>
+</li>
+</ol>
+<h2>조리 과정</h2>
+<ol>
+<li><strong>고기 볶기</strong>  <ul>
+<li>냄비에 참기름을 두르고 소고기를 넣어 중불에서 볶는다.</li>
+<li>고기가 반쯤 익으면 다진 마늘을 넣고 함께 볶는다.</li>
+</ul>
+</li>
+<li><strong>미역 넣기</strong>  <ul>
+<li>불린 미역을 넣고 2~3분간 함께 볶아 미역과 고기가 어우러지도록 한다.</li>
+</ul>
+</li>
+<li><strong>물 붓기</strong>  <ul>
+<li>물 6컵을 넣고 끓인다.</li>
+<li>끓기 시작하면 거품을 걷어낸다.</li>
+</ul>
+</li>
+<li><strong>간 맞추기</strong>  <ul>
+<li>국간장을 넣고 20~30분간 끓인다.</li>
+<li>마지막에 소금으로 간을 조절한다.</li>
+</ul>
+</li>
+</ol>
+<h2>💡팁</h2>
+<ul>
+<li>오래 끓일수록 국물이 진해진다.</li>
+<li>국간장 대신 소금으로만 간을 해도 된다.</li>
+<li>고기를 넣지 않고 멸치나 다시마 육수를 사용하면 채식 미역국이 된다.</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
