@@ -130,7 +130,7 @@
                 const postCard = document.createElement('div');
                 postCard.className = 'post-card p-6';
                 postCard.innerHTML = `
-                        <a href="posts/${post.slug}.html" class="block">
+                        <a href="${post.url}" class="block">
                             <h2 class="text-xl md:text-2xl font-bold mb-2">${post.title}</h2>
                             <p class="text-sm text-gray-500 mb-4">
                                 <span><i class="fas fa-user mr-2"></i>${post.author}</span>
