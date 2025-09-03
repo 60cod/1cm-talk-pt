@@ -81,7 +81,7 @@ fs.readdirSync(postsDir).forEach(file => {
         .back-link {
             display: flex;
             align-items: center;
-            color: #007bff;
+            color: #03254c;
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
@@ -114,7 +114,6 @@ fs.readdirSync(postsDir).forEach(file => {
 
         .meta-item i {
             margin-right: 0.5rem;
-            color: #007bff;
         }
 
         .post {
