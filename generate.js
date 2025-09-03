@@ -6,6 +6,16 @@ const matter = require('gray-matter');
 const postsDir = path.join(__dirname, 'posts');
 const posts = [];
 
+// 마크다운을 순수 텍스트로 변환하는 함수
+function cleanMarkdown(text) {
+  // marked로 HTML 변환 후 HTML 태그 제거
+  const html = marked.parse(text);
+  return html
+    .replace(/<[^>]*>/g, '') // HTML 태그 제거
+    .replace(/\s+/g, ' ')    // 여러 공백을 하나로
+    .trim();                 // 앞뒤 공백 제거
+}
+
 // posts 디렉토리의 모든 파일 읽기
 fs.readdirSync(postsDir).forEach(file => {
   if (file.endsWith('.md')) {
@@ -18,7 +28,7 @@ fs.readdirSync(postsDir).forEach(file => {
       title: data.title,
       author: data.author,
       date: typeof data.date === 'object' ? data.date.toISOString().split('T')[0] : data.date,
-      summary: content.substring(0, 100).trim() + '...',
+      summary: cleanMarkdown(content).substring(0, 100).trim() + '...',
       url: `./posts/${file.replace('.md', '.html')}`
     });
 
